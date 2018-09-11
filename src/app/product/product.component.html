@@ -1,0 +1,60 @@
+<h4 class="display-4"> Products </h4>
+<!--<div *ngIf="addedProduct"  class="alert alert-success">-->
+  <!--{{addedProduct}} added to cart!-->
+<!--</div>-->
+
+<div *ngIf='filterText'>
+  You search for <strong>{{filterText}}</strong>
+</div>
+
+  <div>
+    <input class="form-control" type="text" placeholder="type something.."  [(ngModel)] = "filterText" >
+  </div>
+
+
+
+  <div>
+  <ul class="list-group">
+    <li *ngFor="let product of products | productFilter:filterText | slice:(pager.currentPage-1)* pager.pageSize:((pager.currentPage-1)* pager.pageSize)+pager.pageSize" class="list-group-item">
+      <div class="nav justify-content-end">
+        <button (click)="addToCart(product)" class="btn btn-sm btn-primary btn justify-content-end" >
+          <i class="fas fa-plus"></i>
+          <!--<ion-icon name="add"></ion-icon>-->
+          Add to cart
+        </button>
+      </div>
+      <strong><h5>{{product.productName |uppercase}}</h5></strong>
+      <p>{{product.quantityPerUnit}}</p>
+      <h6>{{product.unitPrice |currency}}(VAT included: {{product.unitPrice |vatAdded |currency}})</h6>
+    </li>
+  </ul>
+</div>
+
+<!--<nav aria-label="Page navigation">-->
+  <!--<ul class="pagination">-->
+    <!--<li *ngFor="let page of pager.pageList" [class.active]="page===pager.currentPage">-->
+      <!--<a style="cursor: pointer;" </a>-->
+    <!--</li>-->
+  <!--</ul>-->
+
+<!--</nav>-->
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li *ngFor="let page of pager.pageList" [class.active]="pager.currentPage===page"><a class="page-link" (click)="setPage(page)">{{page}}</a></li>
+    <!--<li class="page-item"><a href="#">Previous</a></li>-->
+    <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
+    <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+    <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+    <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
+  </ul>
+</nav>
+<!--<table class="table">-->
+  <!--<tr *ngFor='let product of products'>-->
+    <!--<td>{{product.productId}}</td>-->
+    <!--<td>{{product.categoryId}}</td>-->
+    <!--<td>{{product.productName}}</td>-->
+    <!--<td>{{product.unitPrice}}</td>-->
+    <!--<td>{{product.quantityPerUnit}}</td>-->
+    <!--<td>{{product.unitInStock}}</td>-->
+  <!--</tr>-->
+<!--</table>-->
